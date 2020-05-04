@@ -8,7 +8,8 @@ namespace HoMMProofOfConcept
 	{
 		public string Name { get; set; }
 		public int Level { get; set; }
-		public int XP { get; set; }
+		public int XP { get { return XP; } set { GainExperience(value); } }
+		public int XPNextLevel { get; set; }
 		public int Attack { get; set; }
 		public int Defense { get; set; }
 		public int MaxHp { get; set; }
@@ -25,6 +26,7 @@ namespace HoMMProofOfConcept
 			this.Name = Name;
 			Level = 1;
 			XP = 0;
+			XPNextLevel = CalculateXpToNextLevel();
 			Attack = 1;
 			Defense = 1;
 			MaxHp = 10;
@@ -63,6 +65,41 @@ namespace HoMMProofOfConcept
 			}
 		}
 
+		public void LevelUp()
+		{
+			Console.WriteLine($"{Name} has leveled up!!");
+			XPNextLevel = CalculateXpToNextLevel();
+			Level++;
+
+			bool done = false;
+			while (!done)
+			{
+				Console.WriteLine("Select a stat you would like to increase");
+				Console.WriteLine("1) Attack");
+				Console.WriteLine("2) Defense");
+				Console.WriteLine("3) Spell Power");
+				Console.WriteLine("4) Knowledge");
+				Console.WriteLine("5) Charisma");
+				Console.WriteLine("6) Speed");
+				string input = Console.ReadLine();
+				int num = int.Parse(input);
+			}
+		}
+
+		public void GainExperience(int XP)
+		{
+			this.XP += XP;
+			if (XP >= XPNextLevel)
+			{
+				LevelUp();
+			}
+		}
+
+		public int CalculateXpToNextLevel()
+		{
+			int output = (Level)* 1500;
+			return output;
+		}
 		public void DealDamage(Hero target)
 		{
 			int min = this.Attack + (this.Level);
@@ -82,6 +119,14 @@ namespace HoMMProofOfConcept
 				target.IsAlive = false;
 				Console.WriteLine($"{target.Name} is defeated!!!");
 			}
+		}
+
+		public void PrintStats()
+		{
+			Console.WriteLine($"Here are {Name}'s stats:");
+			Console.WriteLine($"Attack: {Attack}");
+			Console.WriteLine($"Spell Power: {SpellPower}");
+			Console.WriteLine($"Knowledge: {Knowledge}");
 		}
 	}
 }

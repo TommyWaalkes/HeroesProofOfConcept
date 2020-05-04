@@ -18,7 +18,24 @@ namespace HoMMProofOfConcept.Encounters
             int pick = r.Next(0, PossibleEncounters.Count);
             return PossibleEncounters[pick];
         }
-        public Encounter GetEncounter(string select, Player p)
+
+        public static Encounter GetRandomEncounter(Player p)
+        {
+            Random r = new Random();
+            int pick = r.Next(0, 3);
+            switch (pick)
+            {
+                case 0:
+                    return new FindTreasure(p);
+                case 1:
+                    return new Statup(p);
+                case 2:
+                    return new BattleEvent(p, new Player("Evil boyo"));
+                default:
+                    return new FindTreasure(p);
+            }
+        }
+        public static Encounter GetEncounter(string select, Player p)
         {
             switch (select.Trim().ToLower())
             {
