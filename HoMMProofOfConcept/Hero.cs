@@ -8,7 +8,8 @@ namespace HoMMProofOfConcept
 	{
 		public string Name { get; set; }
 		public int Level { get; set; }
-		public int XP { get { return XP; } set { GainExperience(value); } }
+		public int XP { get { return _xp; } set { GainExperience(value); } }
+		private int _xp = 0;
 		public int XPNextLevel { get; set; }
 		public int Attack { get; set; }
 		public int Defense { get; set; }
@@ -26,6 +27,7 @@ namespace HoMMProofOfConcept
 		{
 			this.Name = Name;
 			Level = 1;
+			//This line is causing a stack overflow
 			XP = 0;
 			XPNextLevel = CalculateXpToNextLevel();
 			Attack = 1;
@@ -74,13 +76,19 @@ namespace HoMMProofOfConcept
 			bool done = false;
 			while (!done)
 			{
+				PrintStats();
 				Console.WriteLine("Select a stat you would like to increase");
-				Console.WriteLine("1) Attack");
-				Console.WriteLine("2) Defense");
-				Console.WriteLine("3) Spell Power");
-				Console.WriteLine("4) Knowledge");
-				Console.WriteLine("5) Charisma");
-				Console.WriteLine("6) Speed");
+				StatEnum[] stats= (StatEnum[]) Enum.GetValues(typeof(StatEnum));
+				//Console.WriteLine("1) Attack");
+				//Console.WriteLine("2) Defense");
+				//Console.WriteLine("3) Spell Power");
+				//Console.WriteLine("4) Knowledge");
+				//Console.WriteLine("5) Charisma");
+				//Console.WriteLine("6) Speed");
+				for(int i = 0; i < stats.Length; i++)
+				{
+					Console.WriteLine($"{i}: {stats[i]}");
+				}
 				try
 				{
 					string input = Console.ReadLine();
@@ -94,7 +102,7 @@ namespace HoMMProofOfConcept
 					{
 						throw new Exception("Input was out of range lets try that again");
 					}
-
+					done = true;
 				}
 				catch (FormatException)
 				{
@@ -109,8 +117,8 @@ namespace HoMMProofOfConcept
 
 		public void GainExperience(int XP)
 		{
-			this.XP += XP;
-			if (XP >= XPNextLevel)
+			_xp += XP;
+			if (_xp >= XPNextLevel)
 			{
 				LevelUp();
 			}
