@@ -18,7 +18,8 @@ namespace HoMMProofOfConcept
 		public int Knowledge { get; set; }
 		public int Speed { get; set; }
 		public int Charisma { get; set; }
-		public bool IsAlive { get; set; }
+		public StatEnum FavoredStat { get; set; }
+		public bool IsAlive { get; set; } = true;
 		public bool IsAi { get; set; }
 		public Player Owner { get; set; }
 		public Hero(Player Owner, string Name)
@@ -35,7 +36,6 @@ namespace HoMMProofOfConcept
 			Knowledge = 1;
 			Speed = 5;
 			Charisma = 1;
-			IsAlive = true;
 			this.Owner = Owner;
 			this.IsAi = Owner.IsAi;
 			Owner.Heroes.Add(this);
@@ -81,8 +81,29 @@ namespace HoMMProofOfConcept
 				Console.WriteLine("4) Knowledge");
 				Console.WriteLine("5) Charisma");
 				Console.WriteLine("6) Speed");
-				string input = Console.ReadLine();
-				int num = int.Parse(input);
+				try
+				{
+					string input = Console.ReadLine();
+					int num = int.Parse(input);
+
+					if(num >=1 && num <= 6)
+					{
+						StatEnum stat = (StatEnum)Enum.Parse(typeof(StatEnum), num.ToString());
+					}
+					else
+					{
+						throw new Exception("Input was out of range lets try that again");
+					}
+
+				}
+				catch (FormatException)
+				{
+					Console.WriteLine("I didn't understand that let's try again");
+				}
+				catch (Exception e)
+				{
+					Console.WriteLine(e.Message); 
+				}
 			}
 		}
 
@@ -99,6 +120,37 @@ namespace HoMMProofOfConcept
 		{
 			int output = (Level)* 1500;
 			return output;
+		}
+
+		public void IncreaseStat(StatEnum stat, int amount)
+		{
+			if(stat == FavoredStat)
+			{
+				amount++;
+			}
+
+			switch (stat)
+			{
+				case StatEnum.Attack:
+					Attack += amount;
+					break;
+				case StatEnum.Defense:
+					Defense += amount;
+					break;
+				case StatEnum.SpellPower:
+					SpellPower += amount;
+					break;
+				case StatEnum.Knowledge:
+					Knowledge += amount;
+					break;
+				case StatEnum.Charisma:
+					Charisma += amount;
+					break;
+				case StatEnum.Speed:
+					Speed += amount;
+					break;
+			}
+			Console.WriteLine($"{stat.ToString()} has increased by {amount}!");
 		}
 		public void DealDamage(Hero target)
 		{
@@ -127,6 +179,8 @@ namespace HoMMProofOfConcept
 			Console.WriteLine($"Attack: {Attack}");
 			Console.WriteLine($"Spell Power: {SpellPower}");
 			Console.WriteLine($"Knowledge: {Knowledge}");
+			Console.WriteLine($"Charisma: {Charisma}");
+			Console.WriteLine($"Speed: {Speed}");
 		}
 	}
 }
