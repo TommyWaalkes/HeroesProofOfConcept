@@ -70,6 +70,8 @@ namespace HoMMProofOfConcept
             bool done = false;
             while (!done)
             {
+                Console.WriteLine($"Turn: {currentTurn}");
+                Console.WriteLine($"You have {moves} moves left");
                 Console.WriteLine("What would you like to do?");
                 Console.WriteLine("1) Build");
                 Console.WriteLine("2) Explore");
@@ -88,7 +90,8 @@ namespace HoMMProofOfConcept
                             if (moves > 0)
                             {
                                 Console.WriteLine("Lets go exploring!");
-                                EncounterFactory.GetRandomEncounter(p);
+                                Encounter e = EncounterFactory.GetRandomEncounter(p);
+                                e.RunEvent();
                                 moves--;
                             }
                             break;
@@ -96,7 +99,10 @@ namespace HoMMProofOfConcept
                             if(moves > 0)
                             {
                                 Console.WriteLine("Let's go spoiling for a fight");
-                                new BattleEvent(p, new Player("Evil boyo"));
+                                Player enemy = new Player("Evil boyo");
+                                Hero badguy = new Hero(enemy, "French Stewart");
+                                Encounter e  = new BattleEvent(p, enemy);
+                                e.RunEvent();
                                 moves--;
                             }
                             break;

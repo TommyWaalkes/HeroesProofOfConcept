@@ -28,8 +28,8 @@ namespace HoMMProofOfConcept
 			this.Name = Name;
 			Level = 1;
 			//This line is causing a stack overflow
-			XP = 0;
 			XPNextLevel = CalculateXpToNextLevel();
+			XP = 0;
 			Attack = 1;
 			Defense = 1;
 			MaxHp = 10;

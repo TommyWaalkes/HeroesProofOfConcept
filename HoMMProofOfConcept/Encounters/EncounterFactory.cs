@@ -30,7 +30,10 @@ namespace HoMMProofOfConcept.Encounters
                 case 1:
                     return new Statup(p);
                 case 2:
-                    return new BattleEvent(p, new Player("Evil boyo"));
+                    Player enemy = new Player("Evil boyo");
+                    Hero badguy = new Hero(enemy, "French Stewart");
+                    Encounter e = new BattleEvent(p, enemy);
+                    return e;
                 default:
                     return new FindTreasure(p);
             }
