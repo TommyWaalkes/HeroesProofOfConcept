@@ -13,8 +13,9 @@ namespace HoMMProofOfConcept.Encounters
         public override void RunEvent()
         {
             Console.WriteLine("A buff chad appears in the road. You trade workout tips and glean a few new ideas on how to punch shit");
+            Console.WriteLine("Select one of your heroes to get +1 attack!");
             Hero h = SelectAHero();
-            h.Attack++;
+            h.IncreaseStat(StatEnum.Attack, 1);
         }
     }
 }

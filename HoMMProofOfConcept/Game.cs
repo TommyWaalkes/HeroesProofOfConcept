@@ -8,6 +8,7 @@ namespace HoMMProofOfConcept
 {
     class Game
     {
+        public List<int> nums = new List<int>();
         public List<Player> Players { get; set; }
         private int currentTurn = 0;
         private EncounterFactory _Ef;

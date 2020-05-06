@@ -19,7 +19,7 @@ namespace HoMMProofOfConcept
 		public int Knowledge { get; set; }
 		public int Speed { get; set; }
 		public int Charisma { get; set; }
-		public StatEnum FavoredStat { get; set; }
+		public StatEnum FavoredStat { get; set; } = StatEnum.Attack;
 		public bool IsAlive { get; set; } = true;
 		public bool IsAi { get; set; }
 		public Player Owner { get; set; }
@@ -72,19 +72,14 @@ namespace HoMMProofOfConcept
 			Console.WriteLine($"{Name} has leveled up!!");
 			XPNextLevel = CalculateXpToNextLevel();
 			Level++;
-
+			Hp += 10 + (5 * Defense);
 			bool done = false;
 			while (!done)
 			{
 				PrintStats();
 				Console.WriteLine("Select a stat you would like to increase");
 				StatEnum[] stats= (StatEnum[]) Enum.GetValues(typeof(StatEnum));
-				//Console.WriteLine("1) Attack");
-				//Console.WriteLine("2) Defense");
-				//Console.WriteLine("3) Spell Power");
-				//Console.WriteLine("4) Knowledge");
-				//Console.WriteLine("5) Charisma");
-				//Console.WriteLine("6) Speed");
+
 				for(int i = 0; i < stats.Length; i++)
 				{
 					Console.WriteLine($"{i}: {stats[i]}");
@@ -94,9 +89,10 @@ namespace HoMMProofOfConcept
 					string input = Console.ReadLine();
 					int num = int.Parse(input);
 
-					if(num >=1 && num <= 6)
+					if(num >=0 && num <= 6)
 					{
 						StatEnum stat = (StatEnum)Enum.Parse(typeof(StatEnum), num.ToString());
+						IncreaseStat(stat, 1);
 					}
 					else
 					{
