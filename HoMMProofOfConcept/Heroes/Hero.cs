@@ -1,4 +1,5 @@
 ﻿using HoMMProofOfConcept;
+using HoMMProofOfConcept.Heroes;
 using System;
 using System.Collections.Generic;
 
@@ -19,10 +20,14 @@ namespace HoMMProofOfConcept
 		public int Knowledge { get; set; }
 		public int Speed { get; set; }
 		public int Charisma { get; set; }
+		public int SpellPointsMax { get; set; } 
+		public int SpellPoints { get; set; } 
 		public StatEnum FavoredStat { get; set; } = StatEnum.Attack;
 		public bool IsAlive { get; set; } = true;
 		public bool IsAi { get; set; }
 		public Player Owner { get; set; }
+
+		public List<Skill> Skills = new List<Skill>();
 		public Hero(Player Owner, string Name)
 		{
 			this.Name = Name;
@@ -38,6 +43,8 @@ namespace HoMMProofOfConcept
 			Knowledge = 1;
 			Speed = 5;
 			Charisma = 1;
+			SpellPointsMax = CalculateMaxSpellPoints();
+			SpellPoints = SpellPointsMax;
 			this.Owner = Owner;
 			this.IsAi = Owner.IsAi;
 			Owner.Heroes.Add(this);
@@ -109,6 +116,30 @@ namespace HoMMProofOfConcept
 					Console.WriteLine(e.Message); 
 				}
 			}
+			SpellPointsMax = CalculateMaxSpellPoints();
+		}
+
+		public void AddSkill(Skill s)
+		{
+			if(Skills.Count < 8)
+			{
+
+			}
+		}
+
+		public void SetSpellPoints(int gain)
+		{
+			SpellPoints += gain;
+			if(SpellPoints > SpellPointsMax)
+			{
+				SpellPoints = SpellPointsMax;
+			}
+		}
+
+		public int CalculateMaxSpellPoints()
+		{
+			int Max = Knowledge * 10;
+			return Max;
 		}
 
 		public void GainExperience(int XP)
@@ -155,6 +186,7 @@ namespace HoMMProofOfConcept
 					break;
 			}
 			Console.WriteLine($"{stat.ToString()} has increased by {amount}!");
+			SpellPointsMax = CalculateMaxSpellPoints();
 		}
 		public void DealDamage(Hero target)
 		{
