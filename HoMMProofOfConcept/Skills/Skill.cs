@@ -12,9 +12,16 @@ namespace HoMMProofOfConcept.Heroes
         Expert,
         Master
     }
+
+    public enum SkillName
+    {
+        Offense,
+        Logistics, 
+        Learning
+    }
     public abstract class Skill
     {
-        public const string Name = "Skill";
+        public  SkillName Name {get;} = SkillName.Offense;
         public int Level { get; set; } = 1;
         public abstract void ModifyStats(Hero h);
 

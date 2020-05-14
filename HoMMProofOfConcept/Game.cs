@@ -1,4 +1,5 @@
 ﻿using HoMMProofOfConcept.Encounters;
+using HoMMProofOfConcept.Heroes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -54,12 +55,15 @@ namespace HoMMProofOfConcept
 
         public int CalculatePartyMovement(List<Hero> heroes)
         {
-            int slowest = heroes.Min(x => x.Speed);
-            if(slowest <= 0)
+            
+            int lowestSpeed = heroes.Min(x => x.Speed);
+            Hero slowest = heroes.Where(x => x.Speed == lowestSpeed).First();
+            lowestSpeed += slowest.GetSkillLevel(SkillName.Logistics);
+            if (lowestSpeed <= 0)
             {
-                slowest = 1;
+                lowestSpeed = 1;
             }
-            return slowest;
+            return lowestSpeed;
         }
 
         public void PickTurnAction(Player p)

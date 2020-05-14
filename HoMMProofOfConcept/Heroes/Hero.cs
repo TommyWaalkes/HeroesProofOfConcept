@@ -50,6 +50,11 @@ namespace HoMMProofOfConcept
 			Owner.Heroes.Add(this);
 		}
 
+		public void StartTurn()
+		{
+
+		}
+
 		public Hero PickTarget(List<Hero> enemies)
 		{
 			if (!IsAi)
@@ -188,12 +193,62 @@ namespace HoMMProofOfConcept
 			Console.WriteLine($"{stat.ToString()} has increased by {amount}!");
 			SpellPointsMax = CalculateMaxSpellPoints();
 		}
+
+		public bool HasSkill(SkillName skill)
+		{
+			foreach(Skill s in Skills)
+			{
+				if(s.Name == skill)
+				{
+					return true;
+				}
+			}
+
+			return false;
+		}
+
+		public int GetSkillLevel(SkillName name)
+		{
+			int level = 0;
+			if (HasSkill(name))
+			{
+				foreach(Skill s in Skills)
+				{
+					if(s.Name == name)
+					{
+						level = s.Level;
+					}
+				}
+			}
+				return level;
+		}
+
+		public void AddSkill(SkillName name)
+		{
+			if (!HasSkill(name))
+			{
+				Skill s = SkillFactory.GetSkill(name);
+				Skills.Add(s);
+			}
+			else
+			{
+				Console.WriteLine($"{Name} already knows {name}");
+			}
+		}
+
 		public void DealDamage(Hero target)
 		{
-			int min = this.Attack + (this.Level);
+			int min = this.Attack + (this.Level * 2);
 			int max = this.Attack + (this.Level * 5);
+			
 			Random r = new Random();
-
+			if (HasSkill(SkillName.Offense))
+			{
+				int skillLevel = GetSkillLevel(SkillName.Offense);
+				double bonus = 1 + (skillLevel * .1);
+				min = (int) Math.Ceiling(min * bonus);
+				max = (int)Math.Ceiling(max * bonus);
+			}
 			int damage = r.Next(min, max)-target.Defense;
 			if(damage< 1)
 			{
