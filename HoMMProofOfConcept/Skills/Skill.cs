@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace HoMMProofOfConcept.Heroes
+namespace HoMMProofOfConcept.Skills
 {
     public enum SkillLevelEnum
     {

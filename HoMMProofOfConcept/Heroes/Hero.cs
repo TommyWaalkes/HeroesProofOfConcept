@@ -2,11 +2,14 @@
 using HoMMProofOfConcept.Heroes;
 using System;
 using System.Collections.Generic;
+using HoMMProofOfConcept.Skills;
 
 namespace HoMMProofOfConcept
 {
 	public class Hero
 	{
+		//TO DO: Add in Perks based off how skills you have
+		//TO DO: Create a world map using sqaures
 		public string Name { get; set; }
 		public int Level { get; set; }
 		public int XP { get { return _xp; } set { GainExperience(value); } }
@@ -52,7 +55,20 @@ namespace HoMMProofOfConcept
 
 		public void StartTurn()
 		{
+			if(Hp < MaxHp)
+			{
+				Hp++;
+			}
+			if(SpellPoints < SpellPointsMax)
+			{
+				SpellPoints++;
+			}
 
+			if (HasSkill(SkillName.Learning))
+			{
+				int skillLevel = GetSkillLevel(SkillName.Learning);
+				XP += skillLevel * 100;
+			}
 		}
 
 		public Hero PickTarget(List<Hero> enemies)
@@ -149,6 +165,12 @@ namespace HoMMProofOfConcept
 
 		public void GainExperience(int XP)
 		{
+			if (HasSkill(SkillName.Learning))
+			{
+				int learningLevel = GetSkillLevel(SkillName.Learning);
+				double adjustedXP = XP * (learningLevel * .1 + 1);
+				XP = (int) Math.Ceiling(adjustedXP);
+			}
 			_xp += XP;
 			if (_xp >= XPNextLevel)
 			{
