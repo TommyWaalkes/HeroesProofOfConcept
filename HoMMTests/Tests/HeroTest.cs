@@ -56,15 +56,25 @@ namespace HoMMTests.Tests
             h.IncreaseStat(Name, 1);
             int actual = h.GetStat(Name);
             int expected;
-            if (h.FavoredStat == Name)
+            if(Name == StatEnum.Speed)
             {
-                expected = 2;
+                if(h.FavoredStat == Name)
+                {
+                    expected = 7;
+                }
+                else
+                {
+                    expected = 6;
+                }
+            }
+            else if (h.FavoredStat == Name)
+            {
+                expected = 3;
             }
             else
             {
-                expected = 1;
+                expected = 2;
             }
-           
             Assert.Equal(expected, actual);
         }
     }
