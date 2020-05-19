@@ -6,6 +6,10 @@ namespace HoMMProofOfConcept.Skills
 {
     class Logistics : Skill
     {
+        public Logistics() :base(SkillName.Logistics)
+        {
+           
+        }
         public override void ChangeSpell()
         {
             throw new NotImplementedException();

@@ -21,8 +21,14 @@ namespace HoMMProofOfConcept.Skills
     }
     public abstract class Skill
     {
-        public  SkillName Name {get;} = SkillName.Offense;
+        public  SkillName Name { get; set; } 
         public int Level { get; set; } = 1;
+
+        public Skill(SkillName Name)
+        {
+            this.Name = Name;
+        }
+
         public abstract void ModifyStats(Hero h);
 
         public abstract void StartTurn(Hero h);

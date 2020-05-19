@@ -9,12 +9,12 @@ namespace HoMMProofOfConcept
     {
         public List<Hero> HumanParty { get; set; }
         public List<Hero> AIParty { get; set; }
-        public Player p1 { get; set; }
-        public Player p2 { get; set; }
+        public Player P1 { get; set; }
+        public Player P2 { get; set; }
         public Battle(Player p1, Player p2)
         {
-            this.p1 = p1;
-            this.p2 = p2;
+            this.P1 = p1;
+            this.P2 = p2;
             this.HumanParty = p1.Heroes;
             this.AIParty = p2.Heroes;
             SetupCombat();
@@ -32,7 +32,7 @@ namespace HoMMProofOfConcept
         public void PlayRound(List<Hero> combatants)
         {
             Console.WriteLine("Combat start!");
-            Player winner = null;
+            Player winner;
             while (AreEnemiesAlive(out winner)) {
                 Console.WriteLine("New Round");
                 //Put it in here so that speed gets recalculated 
@@ -42,7 +42,7 @@ namespace HoMMProofOfConcept
                     if (c.IsAlive)
                     {
                         Hero target;
-                        if (c.Owner == p1)
+                        if (c.Owner == P1)
                         {
                             target = c.PickTarget(AIParty);
                         }
@@ -56,14 +56,14 @@ namespace HoMMProofOfConcept
             }
 
             Console.WriteLine($"{winner.Name} wins combat!!!");
-            int xp = 0;
-            if(p1 == winner)
+            int xp ;
+            if(P1 == winner)
             {
-               xp = CalculateExperience(p2.Heroes);
+               xp = CalculateExperience(P2.Heroes);
             }
             else
             {
-                xp = CalculateExperience(p1.Heroes);
+                xp = CalculateExperience(P1.Heroes);
             }
             winner.HeroesGainExperience(xp);
            
@@ -111,11 +111,11 @@ namespace HoMMProofOfConcept
             }
             if (!humanLeft)
             {
-                winner = p2;
+                winner = P2;
             }
             else if(!AiLeft)
             {
-                winner = p1;
+                winner = P1;
             }
             else
             {

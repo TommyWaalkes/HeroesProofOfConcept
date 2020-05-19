@@ -5,8 +5,12 @@ using System.Text;
 
 namespace HoMMProofOfConcept.Skills
 {
-    class Learning : Skill
+    public class Learning : Skill
     {
+        public Learning() : base(SkillName.Learning)
+        {
+        }
+
         public override void ChangeSpell()
         {
             throw new NotImplementedException();

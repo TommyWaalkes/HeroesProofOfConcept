@@ -4,7 +4,7 @@ namespace HoMMProofOfConcept
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
             Game g = new Game();
             g.Run();

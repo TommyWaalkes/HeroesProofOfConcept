@@ -6,6 +6,10 @@ namespace HoMMProofOfConcept.Skills
 {
     class Offense : Skill
     {
+        public Offense() :base(SkillName.Offense)
+        {
+            Name = SkillName.Offense;
+        }
         public override void ChangeSpell()
         {
             throw new NotImplementedException();

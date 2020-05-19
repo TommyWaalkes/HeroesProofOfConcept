@@ -44,13 +44,13 @@ namespace HoMMProofOfConcept
                     int pick = int.Parse(input);
                     output = P1.Heroes[pick];
                 }
-                catch(FormatException e)
+                catch(FormatException )
                 {
                     Console.WriteLine("Please input a number");
                     Console.WriteLine("Lets try again");
                     continue;
                 }
-                catch(IndexOutOfRangeException e)
+                catch(IndexOutOfRangeException )
                 {
                     Console.WriteLine($"Please select a number from 0 to {P1.Heroes.Count -1}");
                     Console.WriteLine("Lets try again");

@@ -1,5 +1,6 @@
 ﻿using HoMMProofOfConcept.Encounters;
 using HoMMProofOfConcept.Heroes;
+using HoMMProofOfConcept.Skills;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,7 @@ namespace HoMMProofOfConcept
         public List<int> nums = new List<int>();
         public List<Player> Players { get; set; }
         private int currentTurn = 0;
-        private EncounterFactory _Ef;
+        //private EncounterFactory _Ef;
         public Game()
         {
             Players = new List<Player>();
@@ -117,7 +118,7 @@ namespace HoMMProofOfConcept
                             break;
                     }
                 }
-                catch(Exception e)
+                catch(Exception)
                 {
                     Console.WriteLine("I didn't understand, let's try that again");
                     continue;

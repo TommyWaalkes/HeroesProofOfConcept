@@ -1,4 +1,5 @@
 ﻿using HoMMProofOfConcept.Heroes;
+using HoMMProofOfConcept.Skills;
 using System;
 using System.Collections.Generic;
 using System.Text;

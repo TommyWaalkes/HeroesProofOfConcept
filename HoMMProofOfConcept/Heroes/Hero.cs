@@ -216,6 +216,27 @@ namespace HoMMProofOfConcept
 			SpellPointsMax = CalculateMaxSpellPoints();
 		}
 
+		public int GetStat(StatEnum stat)
+		{
+			switch (stat)
+			{
+				case StatEnum.Attack:
+					return Attack;
+				case StatEnum.Defense:
+					return Defense;
+				case StatEnum.SpellPower:
+					return SpellPower;
+				case StatEnum.Knowledge:
+					return Knowledge;
+				case StatEnum.Charisma:
+					return Charisma;
+				case StatEnum.Speed:
+					return Speed;
+				default:
+					return -1;
+			}
+		}
+
 		public bool HasSkill(SkillName skill)
 		{
 			foreach(Skill s in Skills)
