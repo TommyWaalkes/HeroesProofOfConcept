@@ -4,7 +4,7 @@ using System.Text;
 
 namespace HoMMProofOfConcept.Skills
 {
-    class Logistics : Skill
+    public class Logistics : Skill
     {
         public Logistics() :base(SkillName.Logistics)
         {

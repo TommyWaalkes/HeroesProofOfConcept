@@ -43,6 +43,7 @@ namespace HoMMTests.Tests
             int expected2 = 0;
             Assert.Equal(expected2, actual2);
         }
+
         [Theory]
         [InlineData(StatEnum.Attack)]
         [InlineData(StatEnum.Defense)]

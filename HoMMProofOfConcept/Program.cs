@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Text;
 
 namespace HoMMProofOfConcept
 {
     class Program
     {
-        static void Main()
+        public static void Main()
         {
             Game g = new Game();
             g.Run();

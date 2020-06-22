@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace HoMMProofOfConcept.Heroes
 {
-    class SkillFactory
+    public class SkillFactory
     {
         public Skill GetSkillRandom()
         {

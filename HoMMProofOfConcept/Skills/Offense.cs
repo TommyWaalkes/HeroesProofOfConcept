@@ -4,7 +4,7 @@ using System.Text;
 
 namespace HoMMProofOfConcept.Skills
 {
-    class Offense : Skill
+    public class Offense : Skill
     {
         public Offense() :base(SkillName.Offense)
         {
