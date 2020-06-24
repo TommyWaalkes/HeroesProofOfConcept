@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Game2
+namespace FrontEnd
 {
 #if WINDOWS || LINUX
     /// <summary>

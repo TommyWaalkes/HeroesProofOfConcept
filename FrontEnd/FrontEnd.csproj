@@ -6,11 +6,11 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{A18489E8-FC56-4FA7-A690-BFD045CD6A4A}</ProjectGuid>
+    <ProjectGuid>{0CB7D33C-78A0-44ED-AA23-11F458FA8916}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Game2</RootNamespace>
-    <AssemblyName>Game2</AssemblyName>
+    <RootNamespace>FrontEnd</RootNamespace>
+    <AssemblyName>FrontEnd</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MonoGamePlatform>Windows</MonoGamePlatform>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
