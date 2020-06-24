@@ -18,6 +18,7 @@ namespace Game2
         Texture2D megaman;
         private Vector2 position;
         private SpriteFont font;
+        private AnimatedSprite animatedSprite;
 
         public Game1()
         {
@@ -56,6 +57,8 @@ namespace Game2
             spriteBatch = new SpriteBatch(GraphicsDevice);
             megaman = Content.Load<Texture2D>("megaman");
             font = Content.Load<SpriteFont>("test");
+            Texture2D texture = Content.Load<Texture2D>("SmileyWalk");
+            animatedSprite = new AnimatedSprite(texture, 4, 4);
             // base.LoadContent();
         }
 
@@ -83,7 +86,10 @@ namespace Game2
             {
                 position.X = 0;
             }
-           
+
+            animatedSprite.Update();
+            base.Update(gameTime);
+
         }
 
         /// <summary>
@@ -97,6 +103,7 @@ namespace Game2
             spriteBatch.Begin();
             spriteBatch.Draw(megaman, new Rectangle(0, 0, 100, 50), Color.White);
             spriteBatch.DrawString(font, "Hello World", new Vector2(100, 100), Color.Black);
+            animatedSprite.Draw(spriteBatch, new Vector2(400, 200));
             spriteBatch.End();
 
             base.Draw(gameTime);
